@@ -19,20 +19,22 @@
                 @csrf
                 <div class="card-body">
                     <div class="form-group">
-                    <label for="name">Name:</label>
-                    <input type="text" class="form-control" id="name" placeholder="Enter Permission Name ..." value="{{$permission->name}}">
+                        <label>Guard</label>
+                        <select class="form-control guards" id="guard" style="width: 100%;">
+                            <option value="admin">Admin</option>
+                            <option value="user">User</option>
+                        </select>
                     </div>
                     <div class="form-group">
-                        <div class="custom-control custom-switch">
-                            <input type="checkbox" class="custom-control-input" id="active" @checked($permission->active)>
-                            <label class="custom-control-label" for="active">Active</label>
-                        </div>
+                        <label for="name">Name:</label>
+                        <input type="text" class="form-control" id="name"
+                            placeholder="Enter Permission Name" value="{{$permission->name}}">
                     </div>
                 </div>
                 <!-- /.card-body -->
                 <div class="card-footer">
                     <button class="btn btn-primary" type="button" onclick="update({{$permission->id}})">Update</button>
-                    <a class="btn btn-primary" href="{{route('categories.index')}}"><i class="fas fa-eye mr-1"></i>Show Categories</a>
+                    <a class="btn btn-primary" href="{{route('permissions.index')}}"><i class="fas fa-eye mr-1"></i>Show Permissions</a>
                 </div>
             </form>
         </div>
@@ -44,7 +46,7 @@
     function update(id) {
         axios.put('/cms/admin/permissions/'+id, {
             name: document.getElementById('name').value,
-            active: document.getElementById('active').checked
+            guard_name: document.getElementById('guard').value
         })
         .then(function (response) {
             // handle success

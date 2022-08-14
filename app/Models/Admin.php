@@ -9,12 +9,13 @@ use Spatie\Permission\Traits\HasRoles;
 class Admin extends Authenticatable
 {
     use HasFactory, HasRoles;
-    protected $appends = ['status']; #for api
+
+    // protected $appends = ['status']; #for api
 
     //Append attripute
     //public function get___Attribute()
 
-    public function getStatusAttribute ()
+    public function getStatusKeywordAttribute ()
     {
         return $this->active ? "Active" : "Disabled";
     }

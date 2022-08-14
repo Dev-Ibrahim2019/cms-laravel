@@ -39,7 +39,7 @@
                                         <td>{{$user->name}}</td>
                                         <td>{{$user->email}}</td>
                                         {{-- <td>@if($user->active) {{'Active'}} @else {{'Disabled'}} @endif</td> --}}
-                                        <td><span class="badge @if($user->active) bg-success @else bg-danger @endif ">{{$user->status}}</span></td>
+                                        <td><span class="badge @if($user->active) bg-success @else bg-danger @endif ">{{$user->active_status}}</span></td>
                                         <td>{{$user->created_at}}</td>
                                         <td>{{$user->updated_at}}</td>
                                         <td>

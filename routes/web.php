@@ -10,6 +10,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\PermissionController;
+use App\Http\Controllers\RolePermissionController;
 
 /*
 |--------------------------------------------------------------------------
@@ -29,8 +30,10 @@ Route::prefix('cms/')->middleware('guest:admin')->group(function () {
 });
 
 Route::prefix('cms/admin')->middleware('auth:admin')->group(function () {
+    Route::resource('admins', AdminController::class);
     Route::resource('cities', CityController::class);
     Route::resource('users', UserController::class);
+    Route::resource('roles.permissions', RolePermissionController::class);
 
     Route::resource('roles', RoleController::class);
     Route::resource('permissions', PermissionController::class);

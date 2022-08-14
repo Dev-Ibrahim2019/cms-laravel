@@ -13,6 +13,9 @@ class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable, HasRoles;
 
+    public function getActiveStatusAttribute(){
+        return $this->active ? 'active' : 'In-Active';
+    }
     /**
      * The attributes that are mass assignable.
      *

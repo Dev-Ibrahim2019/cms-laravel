@@ -15,7 +15,8 @@ class RoleController extends Controller
      */
     public function index()
     {
-        $roles = Role::paginate(12);
+
+        $roles = Role::withCount('permissions')->paginate(12);
         return response()->view('cms.spatie.roles.index', ['roles' => $roles]);
     }
 
