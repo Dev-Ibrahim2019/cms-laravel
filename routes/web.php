@@ -1,13 +1,15 @@
 <?php
 
-use App\Http\Controllers\AdminController;
-use App\Http\Controllers\AuthController;
-use App\Http\Controllers\CategoryController;
-use App\Http\Controllers\CityController;
-use App\Http\Controllers\UserController;
-use App\Mail\WelcomeEmail;
 use App\Models\Admin;
+use App\Mail\WelcomeEmail;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\AuthController;
+use App\Http\Controllers\CityController;
+use App\Http\Controllers\RoleController;
+use App\Http\Controllers\UserController;
+use App\Http\Controllers\AdminController;
+use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\PermissionController;
 
 /*
 |--------------------------------------------------------------------------
@@ -26,6 +28,15 @@ Route::prefix('cms/')->middleware('guest:admin')->group(function () {
 
 });
 
+Route::prefix('cms/admin')->middleware('auth:admin')->group(function () {
+    Route::resource('cities', CityController::class);
+    Route::resource('users', UserController::class);
+
+    Route::resource('roles', RoleController::class);
+    Route::resource('permissions', PermissionController::class);
+});
+
+
 Route::prefix('cms/admin')->middleware('auth:admin,user')->group(function () {
     Route::view('/', 'cms.index')->name('demo');
 
@@ -42,6 +53,7 @@ Route::prefix('cms/admin')->middleware('auth:admin,user')->group(function () {
 
     Route::get('logout', [AuthController::class, 'logout'])->name('logout');
 });
+
 
 Route::get('test-email', function () {
     $admin = Admin::find(1);
