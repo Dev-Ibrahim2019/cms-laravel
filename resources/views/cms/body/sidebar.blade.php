@@ -12,7 +12,8 @@
                 <img src="{{asset('cms/dist/img/user2-160x160.jpg')}}" class="img-circle elevation-2" alt="User Image">
             </div>
             <div class="info">
-                <a href="#" class="d-block">Ibrahim Al-Ashqar</a>
+                {{-- {{auth()->user()->name}} --}}
+                <a href="#" class="d-block">{{auth()->user()->name}}</a>
             </div>
         </div>
         <!-- SidebarSearch Form -->
@@ -42,7 +43,7 @@
                 <li class="nav-header">Human Resources</li>
                 <li class="nav-item">
                     <a href="#" class="nav-link">
-                        <i class="nav-icon fas fa-user"></i>
+                        <i class="fas fa-user-shield nav-icon"></i>
                         <p>
                             Admin
                             <i class="right fas fa-angle-left"></i>
@@ -50,13 +51,36 @@
                     </a>
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
-                            <a href="pages/charts/chartjs.html" class="nav-link">
+                            <a href="{{route('admins.index')}}" class="nav-link">
                                 <i class="fas fa-list nav-icon"></i>
                                 <p>Index</p>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="pages/charts/flot.html" class="nav-link">
+                            <a href="{{route('admins.create')}}" class="nav-link">
+                                <i class="fas fa-plus-square nav-icon"></i>
+                                <p>Create</p>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link">
+                        <i class="fas fa-user nav-icon"></i>
+                        <p>
+                            User
+                            <i class="right fas fa-angle-left"></i>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a href="{{route('users.index')}}" class="nav-link">
+                                <i class="fas fa-list nav-icon"></i>
+                                <p>Index</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{route('users.create')}}" class="nav-link">
                                 <i class="fas fa-plus-square nav-icon"></i>
                                 <p>Create</p>
                             </a>
@@ -109,7 +133,25 @@
                             </a>
                         </li>
                     </ul>
-                </li>
+                    <li class="nav-header">Settings</li>
+                    <li class="nav-item">
+                        <a href="{{route('edit-profile')}}" class="nav-link">
+                            <i class="fas fa-edit nav-icon"></i>
+                            <p>Edit Profile</p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{route('edit-password')}}" class="nav-link">
+                            <i class="fas fa-lock nav-icon"></i>
+                            <p>Change Password</p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{route('logout')}}" class="nav-link">
+                            <i class="fas fa-sign-out-alt nav-icon"></i>
+                            <p>Logout</p>
+                        </a>
+                    </li>
             </ul>
         </nav>
     <!-- /.sidebar-menu -->

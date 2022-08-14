@@ -1,7 +1,7 @@
 @extends('cms.parent')
 @section('title', 'Index')
-@section('page-title', 'Display Admins')
-@section('main-page-title', 'Admin')
+@section('page-title', 'Display Users')
+@section('main-page-title', 'User')
 @section('small-page-title', 'Index')
 @section('content')
 <section class="content">
@@ -10,10 +10,10 @@
             <div class="col-12">
                 <div class="card">
                     <div class="card-header">
-                        <h3 class="card-title">Admins</h3>
+                        <h3 class="card-title">Users</h3>
                         <div class="card-tools">
                             <div class="input-group input-group-sm" style="width: 200px;">
-                                <a class="btn btn-primary px-4" href="{{route('admins.create')}}"><i class="fas fa-plus-circle mr-1"></i>Add Admin</a>
+                                <a class="btn btn-primary px-4" href="{{route('users.create')}}"><i class="fas fa-plus-circle mr-1"></i>Add User</a>
                             </div>
                         </div>
                     </div>
@@ -32,20 +32,20 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ($admins as $admin)
-                                {{-- {{dd($admin)}} --}}
+                                @foreach ($users as $user)
+                                {{-- {{dd($user)}} --}}
                                     <tr>
-                                        <td>{{$admin->id}}</td>
-                                        <td>{{$admin->name}}</td>
-                                        <td>{{$admin->email}}</td>
-                                        {{-- <td>@if($admin->active) {{'Active'}} @else {{'Disabled'}} @endif</td> --}}
-                                        <td><span class="badge @if($admin->active) bg-success @else bg-danger @endif ">{{$admin->status}}</span></td>
-                                        <td>{{$admin->created_at}}</td>
-                                        <td>{{$admin->updated_at}}</td>
+                                        <td>{{$user->id}}</td>
+                                        <td>{{$user->name}}</td>
+                                        <td>{{$user->email}}</td>
+                                        {{-- <td>@if($user->active) {{'Active'}} @else {{'Disabled'}} @endif</td> --}}
+                                        <td><span class="badge @if($user->active) bg-success @else bg-danger @endif ">{{$user->status}}</span></td>
+                                        <td>{{$user->created_at}}</td>
+                                        <td>{{$user->updated_at}}</td>
                                         <td>
                                             <div class="d-flex ">
-                                                <a href="{{route('admins.edit', $admin->id)}}" class="btn btn-primary mr-2"><i class="fas fa-edit"></i></a>
-                                                <a href="#" class="btn btn-danger" onclick="confirmDestroy({{$admin->id}}, this)"><i class="fas fa-trash-alt"></i></a>
+                                                <a href="{{route('users.edit', $user->id)}}" class="btn btn-primary mr-2"><i class="fas fa-edit"></i></a>
+                                                <a href="#" class="btn btn-danger" onclick="confirmDestroy({{$user->id}}, this)"><i class="fas fa-trash-alt"></i></a>
                                             </div>
                                         </td>
                                     </tr>
@@ -57,7 +57,7 @@
                 </div>
                 <!-- /.card -->
                 <div class="container">
-                    {{$admins->links()}}
+                    {{$users->links()}}
                 </div>
             </div>
         </div>
@@ -83,7 +83,7 @@
     }
 
     function destroy(id, reference){
-        axios.delete('/cms/admin/admins/'+id)
+        axios.delete('/cms/admin/users/'+id)
         .then(function (response) {
             // handle success
             console.log(response);

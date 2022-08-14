@@ -1,8 +1,8 @@
 @extends('cms.parent')
-@section('title', 'Update')
-@section('page-title', 'Update Admin')
-@section('main-page-title', 'Admin')
-@section('small-page-title', 'Update')
+@section('title', 'Create')
+@section('page-title', 'Create User')
+@section('main-page-title', 'User')
+@section('small-page-title', 'Create')
 @section('content')
 <section class="content">
     <div class="container-fluid">
@@ -11,7 +11,7 @@
         <!-- general form elements -->
         <div class="card card-primary">
             <div class="card-header">
-                <h3 class="card-title">Edit Admin</h3>
+                <h3 class="card-title">Add User</h3>
             </div>
             <!-- /.card-header -->
             <!-- form start -->
@@ -20,25 +20,23 @@
                 <div class="card-body">
                     <div class="form-group">
                         <label for="name">Name:</label>
-                        <input type="text" class="form-control" id="name" placeholder="Enter Admin Name ..." value="{{$admin->name}}">
+                        <input type="text" class="form-control" id="name" placeholder="Enter Your Name ..." value="{{old('name')}}">
                     </div>
                     <div class="form-group">
                         <label for="email">Email:</label>
-                        <input type="email" class="form-control" id="email" placeholder="Enter Category Email ..." value="{{$admin->email}}">
+                        <input type="email" class="form-control" id="email" placeholder="Enter Email ..." value="{{old('email')}}">
                     </div>
-
-                        <div class="form-group">
-                            <div class="custom-control custom-switch">
-                                <input type="checkbox" class="custom-control-input" @if ($admin->id == auth('admin')->id()) disabled @endif id="active" @checked($admin->active)>
-                                <label class="custom-control-label" for="active">Active</label>
-                            </div>
+                    <div class="form-group">
+                        <div class="custom-control custom-switch">
+                            <input type="checkbox" class="custom-control-input" id="active">
+                            <label class="custom-control-label" for="active">Active</label>
                         </div>
-
+                    </div>
                 </div>
                 <!-- /.card-body -->
                 <div class="card-footer">
-                    <button class="btn btn-primary" type="button" onclick="update({{$admin->id}})">Update</button>
-                    <a class="btn btn-primary" href="{{route('admins.index')}}"><i class="fas fa-eye mr-1"></i>Show Admins</a>
+                    <button class="btn btn-primary" type="button" onclick="store()" >Store</button>
+                    <a class="btn btn-primary" href="{{route('users.index')}}"><i class="fas fa-eye mr-1"></i>Show Users</a>
                 </div>
             </form>
         </div>
@@ -47,8 +45,8 @@
 @endsection
 @section('scripts')
 <script>
-    function update(id) {
-        axios.put('/cms/admin/admins/'+id, {
+    function store() {
+        axios.post('/cms/admin/users/', {
             name: document.getElementById('name').value,
             email: document.getElementById('email').value,
             active: document.getElementById('active').checked
@@ -58,7 +56,6 @@
             console.log(response);
             toastr.success(response.data.message);
             document.getElementById('create-form').reset();
-            // window.location.href = '/cms/admin/index'
         })
         .catch(function (error) {
             // handle error
@@ -71,4 +68,3 @@
     }
 </script>
 @endsection
-
